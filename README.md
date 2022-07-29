@@ -27,3 +27,4 @@ Reference information for using PBI to build Reports and Dashboards
 
 # usful links: 
 - [Power BI Tutorial From Beginner to Pro](https://www.youtube.com/watch?v=AGrl-H87pRU&t=282)
+- [Use DAX in PBI Desktop Training Modules](https://docs.microsoft.com/en-us/learn/paths/dax-power-bi/)
