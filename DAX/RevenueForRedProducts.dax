@@ -1,0 +1,4 @@
+
+
+// CALCULATE(<expression>, [[<filter1>], <filter2>]…)
+Revenue Red = CALCULATE([Revenue], 'Product'[Color] = "Red")
