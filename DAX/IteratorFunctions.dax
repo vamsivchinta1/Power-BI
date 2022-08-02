@@ -1,5 +1,28 @@
+# Complex summarization
 Revenue =
 SUMX(
     Sales,
     Sales[Sales Amount]
+)
+
+Discount =
+SUMX(
+    Sales,
+    Sales[Order Quantity]
+    * (
+        RELATED('Product'[List Price]) - Sales[Unit Price]
+    )
+)
+
+# Higher grain summarization
+Revenue Avg Order Line =
+AVERAGEX(
+    Sales,
+    Sales[Order Quantity] * Sales[Unit Price] * (1 - Sales[Unit Price Discount Pct])
+)
+
+Revenue Avg Order =
+AVERAGEX(
+    VALUES('Sales Order'[Sales Order]),
+    [Revenue]
 )
