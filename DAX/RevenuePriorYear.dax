@@ -1,0 +1,11 @@
+Revenue YoY % =
+VAR RevenuePriorYear =
+    CALCULATE(
+        [Revenue],
+        SAMEPERIODLASTYEAR('Date'[Date])
+    )
+RETURN
+    DIVIDE(
+        [Revenue] - RevenuePriorYear,
+        RevenuePriorYear
+    )
