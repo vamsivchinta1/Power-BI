@@ -1,0 +1,5 @@
+Revenue =
+SUMX(
+    Sales,
+    Sales[Sales Amount]
+)
