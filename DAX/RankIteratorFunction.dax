@@ -1,0 +1,19 @@
+RANKX(<table>, <expression>[, <value>[, <order>[, <ties>]]])
+
+Product Quantity Rank =
+RANKX(
+    ALL('Product'[Product]),
+    [Quantity]
+)
+
+Product Quantity Rank =
+IF(
+    HASONEVALUE('Product'[Product]),
+    RANKX(
+        ALL('Product'[Product]),
+        [Quantity],
+        ,
+        ,
+        DENSE
+    )
+)
