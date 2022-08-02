@@ -1,0 +1,5 @@
+Average Sales Per Month = 
+averagex (
+  values (dates[month & year])
+  , [total sales]
+  )
