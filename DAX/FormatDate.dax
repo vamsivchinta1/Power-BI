@@ -1,0 +1,5 @@
+YearMonth = FORMAT('Due Date'[Due Date], "yyyy mmm")
+
+Full Date = FORMAT('Due Date'[Due Date], "yyyy mmm, dd")
+
+MonthKey = (YEAR('Due Date'[Due Date]) * 100) + MONTH('Due Date'[Due Date])
