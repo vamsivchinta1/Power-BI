@@ -1,0 +1,12 @@
+If your formula needs to reference columns in other tables, you have two options:
+
+If the tables are related, directly or indirectly, you can use the RELATED or RELATEDTABLE DAX function. 
+The RELATED function retrieves the value at the one-side of the relationship, while the RELATEDTABLE retrieves values on the many-side. 
+The RELATEDTABLE function returns a table object.
+When the tables aren't related, you can use the LOOKUPVALUE DAX function.
+
+Discount Amount =
+(
+    Sales[Order Quantity]
+        * RELATED('Product'[List Price])
+) - Sales[Sales Amount]
