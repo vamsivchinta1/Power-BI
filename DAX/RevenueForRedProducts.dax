@@ -56,3 +56,19 @@ Revenue % Total Country =
             CurrentRegionRevenue,
             TotalCountryRevenue
         )
+
+Revenue % Total Group =
+VAR CurrentRegionRevenue = [Revenue]
+VAR TotalGroupRevenue =
+    CALCULATE(
+        [Revenue],
+        REMOVEFILTERS(
+            'Sales Territory'[Region],
+            'Sales Territory'[Country]
+        )
+    )
+RETURN
+    DIVIDE(
+        CurrentRegionRevenue,
+        TotalGroupRevenue
+    )
