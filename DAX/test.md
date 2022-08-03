@@ -11,14 +11,28 @@ SUMX(
     Sales[Sales Amount]
 )
 ```
-
-
-// 
+# Filter Contexts (aka the Calculate Function)
+```sql
+CALCULATE(<expression>, [[<filter1>], <filter2>]…)
+```
+## Boolean Expression Filters
+```sql
 Revenue Red = CALCULATE([Revenue], 'Product'[Color] = "Red")
 
 Revenue Red or Blue = CALCULATE([Revenue], 'Product'[Color] IN {"Red", "Blue"})
 
 Revenue Expensive Products = CALCULATE([Revenue], 'Product'[List Price] > 1000)
+```
+## Table Expression Filters
+```sql
+Revenue Red =
+CALCULATE(
+    [Revenue],
+    FILTER(
+        'Product',
+        'Product'[Color] = "Red"
+    )
+)
 
 Revenue High Margin Products =
 CALCULATE(
@@ -28,12 +42,10 @@ CALCULATE(
         'Product'[List Price] > 'Product'[Standard Cost] * 2
     )
 )
+```
 
-// for reference
-// CALCULATE(<expression>, [[<filter1>], <filter2>]…)
-
-
-// Filter Modifier Functions ---------------------------
+![image](https://user-images.githubusercontent.com/42124199/182619754-40ca87af-fc5d-455a-8389-ac3b214b85a2.png)
+```sql
 Revenue % Total Region =
     VAR CurrentRegionRevenue = [Revenue]
     VAR TotalRegionRevenue =
@@ -59,23 +71,26 @@ Revenue % Total Country =
             CurrentRegionRevenue,
             TotalCountryRevenue
         )
-//-----------------------------------------------------------
+        
 Revenue % Total Group =
-VAR CurrentRegionRevenue = [Revenue]
-VAR TotalGroupRevenue =
-    CALCULATE(
-        [Revenue],
-        REMOVEFILTERS(
-            'Sales Territory'[Region],
-            'Sales Territory'[Country]
+    VAR CurrentRegionRevenue = [Revenue]
+    VAR TotalGroupRevenue =
+        CALCULATE(
+            [Revenue],
+            REMOVEFILTERS(
+                'Sales Territory'[Region],
+                'Sales Territory'[Country]
+            )
         )
-    )
-RETURN
-    DIVIDE(
-        CurrentRegionRevenue,
-        TotalGroupRevenue
-    )
-    
+    RETURN
+        DIVIDE(
+            CurrentRegionRevenue,
+            TotalGroupRevenue
+        )
+```
+![image](https://user-images.githubusercontent.com/42124199/182620506-67d2da5d-72d0-4db4-a715-f6663d6c35ef.png)
+
+```sql   
 Revenue % Total Country =
 VAR CurrentRegionRevenue = [Revenue]
 VAR TotalCountryRevenue =
@@ -91,4 +106,11 @@ RETURN
             TotalCountryRevenue
         )
     )
-//-----------------------------------------------------------
+```
+# Context Transition
+```sql
+Customer Segment =
+VAR CustomerRevenue = CALCULATE(SUM(Sales[Sales Amount]))
+RETURN
+    IF(CustomerRevenue < 2500, "Low", "High")
+```
