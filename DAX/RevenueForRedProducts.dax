@@ -28,3 +28,18 @@ CALCULATE(
 
 // for reference
 // CALCULATE(<expression>, [[<filter1>], <filter2>]…)
+
+
+// Filter Modifier Functions
+Revenue % Total Region =
+VAR CurrentRegionRevenue = [Revenue]
+VAR TotalRegionRevenue =
+    CALCULATE(
+        [Revenue],
+        REMOVEFILTERS('Sales Territory')
+    )
+RETURN
+    DIVIDE(
+        CurrentRegionRevenue,
+        TotalRegionRevenue
+    )
