@@ -30,7 +30,7 @@ CALCULATE(
 // CALCULATE(<expression>, [[<filter1>], <filter2>]…)
 
 
-// Filter Modifier Functions
+// Filter Modifier Functions ---------------------------
 Revenue % Total Region =
     VAR CurrentRegionRevenue = [Revenue]
     VAR TotalRegionRevenue =
@@ -56,7 +56,7 @@ Revenue % Total Country =
             CurrentRegionRevenue,
             TotalCountryRevenue
         )
-
+//-----------------------------------------------------------
 Revenue % Total Group =
 VAR CurrentRegionRevenue = [Revenue]
 VAR TotalGroupRevenue =
@@ -72,3 +72,20 @@ RETURN
         CurrentRegionRevenue,
         TotalGroupRevenue
     )
+    
+Revenue % Total Country =
+VAR CurrentRegionRevenue = [Revenue]
+VAR TotalCountryRevenue =
+    CALCULATE(
+        [Revenue],
+        REMOVEFILTERS('Sales Territory'[Region])
+    )
+RETURN
+    IF(
+        ISINSCOPE('Sales Territory'[Region]),
+        DIVIDE(
+            CurrentRegionRevenue,
+            TotalCountryRevenue
+        )
+    )
+//-----------------------------------------------------------
