@@ -1,3 +1,5 @@
+# https://www.sqlbi.com/articles/create-static-tables-in-dax-using-the-datatable-function/
+
 # calculated table with the union of different rows
 Segments_UnionRows =
 UNION (
@@ -18,3 +20,4 @@ Segments_Datatable =
           { "High", 100, 9999999 }
       }
   )
+
