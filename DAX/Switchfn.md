@@ -1,3 +1,8 @@
+
+![image](https://user-images.githubusercontent.com/42124199/188653156-c6785f3f-3e2e-43cb-adaf-a2f95d15172e.png)
+
+
+```sql
 Switcher # of Programs = 
     SWITCH(
         SUMX('Subtable to Switch','Subtable to Switch'[FIlters]),
@@ -18,3 +23,4 @@ Total Capacity =
         SUM(Programs_dimension_table[Max_capacity]),
         FILTER(Programs_fact_table, Programs_fact_table[Open] < 2 )
     )
+```
