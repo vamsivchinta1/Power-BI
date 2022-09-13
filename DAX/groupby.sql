@@ -8,3 +8,11 @@ SUMMARIZECOLUMNS (
             Sales[Quantity] * Sales[Net Price]    -- Multiplication, executed in the row context
         )                                         -- After SUMX there is no longer a row context
 )
+
+
+
+RowNum = 
+CALCULATE (
+    COUNT ( Table1[Index] ),
+    FILTER ( ALLSELECTED ( Table1 ), Table1[Index] <= MAX ( Table1[Index] ) )
+)
